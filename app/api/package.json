@@ -10,6 +10,9 @@
    "dependencies": {
       "express": "^4.16.1",
       "elasticsearch": "latest",
-      "get-json": "latest"
+      "get-json": "latest",
+      "connect": "^3.2.0",
+      "js-yaml": "^3.3.0",
+      "swagger-tools": "0.10.1"
    }
 }

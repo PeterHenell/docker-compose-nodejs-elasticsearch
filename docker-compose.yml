@@ -1,28 +1,41 @@
-#version: '3'
+version: '3'
+services:
 
-elasticsearch:
+ elasticsearch:
   image: elasticsearch:alpine
+  environment:
+   - cluster.name=docker-cluster
+   - bootstrap.memory_lock=true
+   - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  ulimits:
+   memlock:
+    soft: -1
+    hard: -1
   ports:
    - "9200:9200"
    - "9300:9300"
 
-web:
+ web:
   build: app/Docker/.
   ports:
    - "8080:8080"
   links:
    - elasticsearch:elasticsearch
+  depends_on:
+   - elasticsearch
+   - swagger
   volumes:
    - ./app/api:/var/www/example.com/api
+   - shared:/var/www/example.com/swagger-spec
 
-
-swagger:
+ swagger:
   build: swagger-spec/.
-  command: java -jar /swagger-codegen-cli.jar generate -l nodejs-server -i petstore.yaml -o generated
-  volumes: ['./swagger-spec:/local']
+  command: java -jar /swagger-codegen-cli.jar generate -l nodejs-server -i /local/petstore.yaml -o /output
+  volumes:
+    - ./app/api/generated:/output
+    - ./swagger-spec:/local
 
-#docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli generate \
-#    -i http://petstore.swagger.io/v2/swagger.json \
-#        -l go \
-#            -o /local/out/go
+
+volumes:
+  shared:
 
