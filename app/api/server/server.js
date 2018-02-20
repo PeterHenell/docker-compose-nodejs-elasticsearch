@@ -10,10 +10,7 @@ const HOST = '0.0.0.0';
 const app = express();
 var el = require('./connections.js');
 
-el.cluster.health({},function(err,resp,status) {
-    console.log("-- Client Health --",resp);
-});
-
+el.health();
 
 
 app.get('/', (req, res) => {
@@ -21,7 +18,12 @@ app.get('/', (req, res) => {
 });
 
 
-// module.exports = client;
+app.get('/pet', (req, res) => {
+    // implement get pet object
+    var resp = el.createIndex();
+    res.send(`resp=${resp}\n`);
+});
+
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
