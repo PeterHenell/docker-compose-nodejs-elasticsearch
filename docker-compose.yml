@@ -16,4 +16,13 @@ web:
    - ./app/api:/var/www/example.com/api
 
 
+swagger:
+  build: swagger-spec/.
+  command: java -jar /swagger-codegen-cli.jar generate -l nodejs-server -i petstore.yaml -o generated
+  volumes: ['./swagger-spec:/local']
+
+#docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli generate \
+#    -i http://petstore.swagger.io/v2/swagger.json \
+#        -l go \
+#            -o /local/out/go
 
