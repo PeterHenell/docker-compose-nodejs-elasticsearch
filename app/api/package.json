@@ -1,0 +1,15 @@
+{
+   "name": "configuration-service_app",
+   "version": "1.0.0",
+   "description": "Configuration service for metadatamanagement",
+   "author": "First Last <first.last@example.com>",
+   "main": "server.js",
+   "scripts": {
+      "start": "node server.js"
+   },
+   "dependencies": {
+      "express": "^4.16.1",
+      "elasticsearch": "latest",
+      "get-json": "latest"
+   }
+}

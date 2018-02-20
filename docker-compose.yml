@@ -1,0 +1,19 @@
+#version: '3'
+
+elasticsearch:
+  image: elasticsearch:alpine
+  ports:
+   - "9200:9200"
+   - "9300:9300"
+
+web:
+  build: app/Docker/.
+  ports:
+   - "8080:8080"
+  links:
+   - elasticsearch:elasticsearch
+  volumes:
+   - ./app/api:/var/www/example.com/api
+
+
+
