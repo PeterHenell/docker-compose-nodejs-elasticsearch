@@ -4,4 +4,4 @@ if [ -z "$NODE_ENV" ]; then
 fi
 cd /var/www/example.com/
 npm install
-swagger project start docker-compose-nodejs-elastic
+swagger project verify docker-compose-nodejs-elastic & swagger project start docker-compose-nodejs-elastic
