@@ -1,6 +1,7 @@
 FROM node:carbon
 
-RUN npm install pm2 -g
+RUN npm install -g swagger
+#RUN swagger project create 
 
 ADD start.sh /start.sh
 RUN chmod 755 /start.sh
