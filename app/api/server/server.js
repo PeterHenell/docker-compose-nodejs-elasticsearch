@@ -65,6 +65,6 @@ server.use(function(err, req, res, next) {
 });
 
 // Start listening on port 8000 (the port number is specified in PetStore.yaml)
-server.listen(8080,'0.0.0.0',function() {
+server.listen(8080,function() {
     console.log('The Swagger Pet Store is now running at http://localhost:8080');
 });
