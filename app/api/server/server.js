@@ -1,29 +1,28 @@
-'use strict';
+'use strict'
 
+const PORT = 8080
+const HOST = "0.0.0.0"
+
+var http = require('http');
 const express = require('express');
+var swaggerize = require('swaggerize-express');
 
-// Constants
-const PORT = 8080;
-const HOST = '0.0.0.0';
-
-// App
 const app = express();
-var el = require('./connections.js');
 
-el.health();
+var server = http.createServer(app);
+
+app.use(swaggerize({
+    api: require('./swagger.json'),
+    docspath: '/api-docs',
+    handlers: './handlers'
+}));
+
+//server.listen(PORT, HOST, function () {
+//    app.swagger.api.host = server.address().address + ':' + server.address().port;
+//});
+
+server.listen(PORT, HOST);
 
 
-app.get('/', (req, res) => {
-    res.send('Hello world\n');
-});
-
-
-app.get('/pet', (req, res) => {
-    // implement get pet object
-    var resp = el.createIndex();
-    res.send(`resp=${resp}\n`);
-});
-
-
-app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
+

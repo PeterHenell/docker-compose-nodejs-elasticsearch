@@ -23,19 +23,18 @@ services:
    - elasticsearch:elasticsearch
   depends_on:
    - elasticsearch
-   - swagger
   volumes:
    - ./app/api:/var/www/example.com/api
-   - shared:/var/www/example.com/swagger-spec
+ #  - shared:/var/www/example.com/swagger-spec
 
- swagger:
-  build: swagger-spec/.
-  command: java -jar /swagger-codegen-cli.jar generate -l nodejs-server -i /local/petstore.yaml -o /output
-  volumes:
-    - ./app/api/generated:/output
-    - ./swagger-spec:/local
+# swagger:
+#  build: swagger-spec/.
+#  command: java -jar /swagger-codegen-cli.jar generate -l nodejs-server -i /local/petstore.yaml -o /output
+#  volumes:
+#    - ./app/api/generated:/output
+#    - ./swagger-spec:/local
 
 
-volumes:
-  shared:
+#volumes:
+#  shared:
 
