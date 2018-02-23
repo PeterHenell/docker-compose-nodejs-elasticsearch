@@ -1,2 +1,1 @@
-app/api/node_modules
-app/api/generated
+**/node_modules
